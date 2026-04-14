@@ -1,5 +1,6 @@
 
 import {Link, useNavigate} from "react-router-dom"
+import Active from "../ActivityIcon/ActivityIcon";
 
 function TestForm(){
     const navigate = useNavigate();
@@ -25,6 +26,7 @@ function TestForm(){
 
     return(
         <>
+        <Active />
         <Link to="/">Home</Link>
         <form onSubmit={handleSubmit} method="POST">
             <h1>Hello Sir</h1>

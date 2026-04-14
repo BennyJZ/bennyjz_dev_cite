@@ -1,19 +1,23 @@
 import {BrowserRouter ,Routes, Route} from "react-router-dom"
 
-import TestForm from "./components/TestForm.jsx"
-import LoginForm from "./components/Login.jsx"
-import Home from "./components/home.jsx"
-import Owner from "./components/owner.jsx"
+import TestForm from "./components/Buttons/TestForm.jsx"
+import LoginForm from "./components/Buttons/Login.jsx"
+import Home from "./components/Home/home.jsx"
 
 
 function App() {
+
+  fetch('http://localhost:3000/', {
+    credentials: 'include'
+  })
+  .then(res => res.json())
+
   return(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />}/>
         <Route path="/register" element={<TestForm />}/>
         <Route path="/login" element={<LoginForm />}/>
-        <Route path="/owner" element={<Owner />}/>
       </Routes>
     </BrowserRouter>
   )

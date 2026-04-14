@@ -1,4 +1,4 @@
-import { baseurl } from "../..";
+import { baseurl } from "../../..";
 
 function Logout(){
     async function handleSubmit(e){
@@ -13,9 +13,11 @@ function Logout(){
     }
     return(
         <>
-        <button onClick={handleSubmit}>
-            Log Out
-        </button>
+        <div>
+            <button onClick={handleSubmit}>
+                Log Out
+            </button>
+        </div>
         </>
     )
 }

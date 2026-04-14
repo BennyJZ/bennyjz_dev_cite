@@ -1,0 +1,35 @@
+.HomePage{
+    padding-top: 5rem;
+    display: flex;
+
+    max-width:1100px;
+    min-width: 800px;
+    width: 100%;
+    border: solid green;
+}
+
+.MainCont{
+    display: flex;
+    flex-direction: column;
+    min-width: inherit;
+    border: solid pink;
+}
+
+.AboutCont{
+    border: solid blue;
+    height: 100vh;
+}
+.ExpCont{
+    border: solid blue;
+    height: 100vh;
+}
+
+.ProjCont{
+    border: solid blue;
+    height: 100vh;
+}
+
+.titleCont{
+    position: sticky;
+    top: 0;
+}

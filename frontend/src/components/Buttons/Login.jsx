@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom"
-import { baseurl } from "../..";
+import { baseurl } from "../../..";
 
 function LoginForm(){
 

@@ -1,24 +1,46 @@
 
-body{
-    margin: 0;
-}
-p{
-    padding: 0;
-    margin: 0;
+*{
+	margin: 0;
+	padding: 0;
 }
 
 button{
 	background: none;
 	color: inherit;
 	border: none;
-	padding: 0;
 	font: inherit;
 	cursor: pointer;
-	outline: inherit;
 }
 
-.special{
-    background-color:lightgreen;
-    height: 100%;
-    width: 100%;
+:root {
+	--bg: #1D1616;
+	--text: #EEEEEE;
+	--accText: rgba(238, 238, 238, 0.55);
+	--accDark: #8E1616;
+	--accLight: #D84040;
+}
+
+.dark {
+	--bg: black;
+	--text: white;
+}
+
+body{
+	background-color: var(--bg);
+	color: var(--text);
+	border-color: var(--accDark);
+}
+
+p{
+	color:var(--accText);
+}
+
+span{
+	color: var(--text);
+}
+
+section{
+	display: flex;
+	align-items: center;
+	flex-direction: column;
 }

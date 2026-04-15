@@ -8,3 +8,11 @@
     /* Style */
     width: 100%;
 }
+
+.contIcon{
+    transition: 300ms color;
+}
+.contIcon:hover{
+    color:var(--accDark);
+    cursor: var(--staff);
+}

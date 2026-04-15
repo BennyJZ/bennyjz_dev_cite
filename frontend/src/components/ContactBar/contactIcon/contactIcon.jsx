@@ -8,9 +8,9 @@ function ContactIcon(){
     return(
         <>
             <div className="contactBar">
-                <LinkedInIcon sx={{fontSize:25}} />
-                <GitHubIcon sx={{fontSize:22}} />
-                <EmailIcon sx={{fontSize:25}}/>
+                <div className="contIcon"><LinkedInIcon sx={{fontSize:25}} /></div>
+                <div className="contIcon"><GitHubIcon sx={{fontSize:22}} /></div>
+                <div className="contIcon"><EmailIcon sx={{fontSize:25}}/></div>
             </div>
         </>
     )

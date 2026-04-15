@@ -7,11 +7,6 @@ import Home from "./components/Home/home.jsx"
 
 function App() {
 
-  fetch('http://localhost:3000/', {
-    credentials: 'include'
-  })
-  .then(res => res.json())
-
   return(
     <BrowserRouter>
       <Routes>

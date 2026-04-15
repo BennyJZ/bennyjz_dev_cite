@@ -19,6 +19,7 @@
 
 .wuSprite:hover{
     filter: drop-shadow(5px 2px 4px rgba(0, 0, 0, 0.5));
+    cursor: var(--staff);
 }
 
 .wuSpriteCont{
@@ -27,8 +28,10 @@
     align-items: center;
 }
 
-.theStack{
+.theStackWrapper{
     display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap:3px;
+    overflow: hidden;
+    height: 100%;
 }

@@ -33,15 +33,6 @@ passport.deserializeUser((user,cb)=>{
     cb(null,user)
 })
 
-app.get("/", (req, res) => {
-    if (!req.cookies.visited) {
-        res.cookie('visited', 'true', { maxAge: 1000*60*60*3 });
-        return res.json({ firstVisit: true });
-    }
-    res.json({ firstVisit: false });
-    next()
-});
-
 app.use("/auth",authRouter);
 
 app.get("/api",requireAuth("owner","admin","guest"))

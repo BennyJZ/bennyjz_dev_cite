@@ -13,11 +13,12 @@ button{
 }
 
 :root {
-	--bg: #1D1616;
+	--bg: rgba(29, 22, 22, 1);
 	--text: #EEEEEE;
 	--accText: rgba(238, 238, 238, 0.55);
 	--accDark: #8E1616;
-	--accLight: #D84040;
+	--accLight: rgba(255, 215, 0, 0.25);
+	--staff: url("../src/assets/staff.png"), auto;
 }
 
 .dark {

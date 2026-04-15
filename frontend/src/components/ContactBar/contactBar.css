@@ -28,7 +28,11 @@
     height: 0100%;
 
     overflow: hidden;
-    cursor: pointer;
+    cursor: var(--staff);
 
-    transition: height 300ms;
+    transition: height 300ms, color 300ms;
+}
+
+.rightBar:hover{
+    color:var(--accDark);
 }

@@ -2,6 +2,7 @@
 *{
 	margin: 0;
 	padding: 0;
+	box-sizing: border-box;
 }
 
 button{
@@ -26,10 +27,20 @@ button{
 	--text: white;
 }
 
+html{
+	scroll-behavior: smooth;
+}
+
+a{
+	all:unset;
+	cursor: var(--staff);
+}
+
 body{
 	background-color: var(--bg);
 	color: var(--text);
 	border-color: var(--accDark);
+	font-family: roboto;
 }
 
 p{

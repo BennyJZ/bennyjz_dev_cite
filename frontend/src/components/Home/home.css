@@ -1,11 +1,11 @@
 .HomePage{
-    padding-top: 5rem;
     display: flex;
-
-    max-width:1100px;
+    max-width: 1000px;
     min-width: 300px;
     width: 100%;
-    border: solid green;
+    padding: 5rem 20px 0 20px;
+    gap: 2rem;
+    /* border: solid green; */
 }
 
 .MainCont{
@@ -13,29 +13,39 @@
     flex-direction: column;
     min-width: 300px;
     width: 100%;
-    border: solid pink;
+    /* border: solid pink; */
 }
 
 .AboutCont{
-    border: solid blue;
+    /* border: solid blue; */
     height: 100vh;
 }
 .ExpCont{
-    border: solid blue;
+    /* border: solid blue; */
     height: 100vh;
 }
 
 .ProjCont{
-    border: solid blue;
+    /* border: solid blue; */
     height: 100vh;
 }
 
 .titleCont{
     position: sticky;
     top: 0;
+
+    display: flex;
+    align-items: center;
+    backdrop-filter: blur(10px);
+
+    height: 3rem;
+
+    background-color: rgba(29, 22, 22, 0.75);
+    font-size: 1rem;
+
 }
 
 .theStack{
-    transform: translateX(0%);
-    transition: transform 400ms;
+    width: 100%;
+    transition: transform 400ms, width 400ms;
 }

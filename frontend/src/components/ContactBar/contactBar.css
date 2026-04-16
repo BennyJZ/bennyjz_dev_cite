@@ -5,14 +5,16 @@
     left: 50%;
     transform: translatex(-50%);
     bottom: 0.75rem;
+    z-index: 1;
 
     display: flex;
     justify-content: center;
+    align-items: center;
 
     border: solid var(--accDark);
     border-radius: 25px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.40);
-    height: 2rem;
+    height: 2.5rem;
     background-color: var(--bg);
 }
 
@@ -25,7 +27,7 @@
     justify-content: center;
     align-items: center;
 
-    height: 0100%;
+    height: 100%;
 
     overflow: hidden;
     cursor: var(--staff);

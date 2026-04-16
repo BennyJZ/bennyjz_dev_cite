@@ -1,12 +1,12 @@
 .contactBar{
     /* Contents */
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
-    gap: 1rem;
 
     /* Style */
     width: 100%;
+    height: fit-content;
 }
 
 .contIcon{

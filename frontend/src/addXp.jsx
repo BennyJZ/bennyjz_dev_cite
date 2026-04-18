@@ -32,7 +32,7 @@ function AddXp(){
         <div>Work Title</div>
         <input name="work_title"/>
         <div>desc</div>
-        <input name="description"/>
+        <textarea name="description" rows="5" cols="60"/>
         <div>tag (separate by commas)</div>
         <input name="tag"/>
         link

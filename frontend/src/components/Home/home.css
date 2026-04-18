@@ -16,19 +16,15 @@
     /* border: solid pink; */
 }
 
-.AboutCont{
-    /* border: solid blue; */
+/* .AboutCont{
 }
 
 
 .ExpCont{
-    /* border: solid blue; */
 }
 
 .ProjCont{
-    /* border: solid blue; */
-    height: 100vh;
-}
+} */
 
 .titleCont{
     position: sticky;
@@ -37,6 +33,7 @@
     display: flex;
     align-items: center;
     backdrop-filter: blur(10px);
+    z-index: 1;
 
     height: 3rem;
 

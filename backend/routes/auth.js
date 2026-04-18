@@ -16,6 +16,14 @@ router.post("/register", async (req, res, next)=>{
     }
 })
 
+router.post("/updateuser", async (req, res, next)=>{
+    try {
+        
+    } catch (error) {
+        next(error)
+    }
+})
+
 router.post("/login",(req,res,next)=>{passport.authenticate("local",(err, user)=>{
     if (err) {
         return next(err)

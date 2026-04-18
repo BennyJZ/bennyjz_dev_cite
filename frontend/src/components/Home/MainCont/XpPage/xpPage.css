@@ -1,0 +1,19 @@
+.xpWrap{
+    padding: 2rem 0 5rem 0;
+}
+.xpCont{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.xpCont:hover .xpCard {
+    opacity: 0.3;
+}
+
+
+.xpCont:hover .xpCard:hover {
+    opacity: 1;
+}
+
+

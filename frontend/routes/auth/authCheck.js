@@ -1,4 +1,4 @@
-import { baseurl } from ".."
+const baseurl = "http://localhost:3000"
 
 async function checkAuth(){
     const res = await fetch(baseurl+"/authCheck",{

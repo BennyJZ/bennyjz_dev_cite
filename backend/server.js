@@ -1,9 +1,10 @@
 import express from "express"
 import session from "express-session"
 import authRouter from "./routes/auth.js"
+import apiRouter from "./routes/api.js"
 import passport from "passport"
 import {initLocalStrategy} from "./auth/localstrategy.js"
-import requireAuth from "./auth/accessRole.js"
+//import requireAuth from "./auth/accessRole.js"
 import dotenv from "dotenv"
 dotenv.config({path:new URL("./.env", import.meta.url)})
 
@@ -33,9 +34,13 @@ passport.deserializeUser((user,cb)=>{
     cb(null,user)
 })
 
+app.get("/",(req,res)=>{
+    res.send("IM ALIIIVE")
+})
+
 app.use("/auth",authRouter);
 
-app.get("/api",requireAuth("owner","admin","guest"))
+app.use("/api",apiRouter)
 
 app.get("/authCheck", (req,res,next)=>{
     if (req.isAuthenticated()){

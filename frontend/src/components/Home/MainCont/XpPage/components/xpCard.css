@@ -1,0 +1,58 @@
+.xpCard{
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 5px;
+    transition: 300ms;
+
+}
+
+.xpCard:hover{
+    background-color: rgba(238, 238, 238, 0.02);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5), 0 2px 5px 0 rgba(0, 0, 0, 0.40);
+}
+
+.xpDesc{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.xpTitle{
+    transition: 300ms;
+}
+
+.icon{
+    display: inline-block;
+    transform: translate(0px, 0px);
+    transition: 300ms;
+}
+
+.xpCard:hover .xpTitle{
+    color: var(--accDark);
+}
+
+
+.xpCard:hover .icon{
+    transform: translate(3px, -3px);
+}
+
+.xpCardCont{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.tagCont{
+    display: flex;
+    gap: 1rem;
+}
+
+.xpTagWrap{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background-color: rgba(142, 22, 22, 0.2);
+    border-radius: 20px;
+}

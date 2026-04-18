@@ -11,9 +11,5 @@ const data = {
 }
 
 
-// await encryptPass("683083ee-406f-4f7c-913c-c5788fbfd350","spellchecka")
-
-// await user.createRow(data)
-
 await user.clearTable()
 await creds.clearTable()

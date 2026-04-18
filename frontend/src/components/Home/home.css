@@ -1,10 +1,10 @@
 .HomePage{
     display: flex;
-    max-width: 1000px;
+    max-width: 1100px;
     min-width: 300px;
     width: 100%;
     padding: 5rem 20px 0 20px;
-    gap: 2rem;
+    gap: 5rem;
     /* border: solid green; */
 }
 
@@ -18,11 +18,11 @@
 
 .AboutCont{
     /* border: solid blue; */
-    height: 100vh;
 }
+
+
 .ExpCont{
     /* border: solid blue; */
-    height: 100vh;
 }
 
 .ProjCont{
@@ -40,9 +40,8 @@
 
     height: 3rem;
 
-    background-color: rgba(29, 22, 22, 0.75);
+    background-color: rgba(29, 22, 22, 0.7);
     font-size: 1rem;
-
 }
 
 .theStack{

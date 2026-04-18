@@ -1,6 +1,8 @@
-import checkAuth from "../../../auth/authCheck";
-import "./ActivityIcon.css"
-
+import checkAuth from "../../../routes/auth/authCheck.js";
+import LoginForm from "../Buttons/Login.jsx";
+import Logout from "../Buttons/Logout.jsx";
+import "./ActivityIcon.css";
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 function Active(){
@@ -9,15 +11,15 @@ function Active(){
     useEffect(()=>{
         async function load(){
             const result = await checkAuth()
-            console.log(result)
             setAuth(result.authenticated)
-            setUser(result.user.username)
+            setUser(result.user?result.user.username:null)
         }
         load();
     },[])
 
     return(
         <>
+        <div>{auth?<Logout />: <Link to="/login">Login</Link>}</div>
         <div className="ActivityCont">
             {auth? <div className="WelCont"><p>{user}</p></div>:null}
             <div className="Activity">

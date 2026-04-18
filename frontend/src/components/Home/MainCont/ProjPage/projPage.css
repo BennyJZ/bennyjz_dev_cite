@@ -1,0 +1,20 @@
+.projCont{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem 0 5rem 0;
+}
+
+.projCard{
+    border: solid;
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+
+}
+
+
+.rateCard{
+    display: flex;
+    gap: 1rem;
+}

@@ -5,7 +5,7 @@ import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 function XpCard(props){
     return(<><a href={props.link}>
             <div className="xpCard">
-            <div>
+            <div className="xpDate">
                 <p>{props.date}</p>
             </div>
             <div className="xpCardCont">
@@ -14,7 +14,9 @@ function XpCard(props){
                     <p>{props.desc}</p>
                 </div>
                 <div className="tagCont">
-                    <XpTags tagname={props.tag}/> 
+                    {props.tag[0].length<=0?null:props.tag.map(item=>{
+                        return <XpTags tagname={item}/> 
+                    })}
                 </div>
             </div>
         </div>

@@ -2,7 +2,6 @@ import express from "express"
 import requireAuth from "../auth/accessRole.js";
 import encryptPass from "../utils/encryptPassword.js";
 import * as xp from ".././models/xp_cards.js"
-import { getRowByEmail } from "../models/users.js";
 
 
 const router = express.Router();
@@ -25,8 +24,14 @@ router.post("/addxp", async(req,res,next)=>{
     }
 })
 
-router.get("")
+router.get("/getxp", async (req, res, next)=>{
+    try {
+        const result = await xp.getTable()
+        res.json(result.rows)
+    } catch (error) {
+        next(error)
+    }
 
-
+})
 
 export default router;

@@ -15,7 +15,17 @@ async function drop(db){
     }
 }
 
+async function empty(db){
+    try {
+        await db.query("TRUNCATE TABLE xp_cards")
+    } catch (error) {
+        console.error(error)
+        throw error;
+    }
+}
+
 export {
     create,
-    drop
+    drop,
+    empty
 }

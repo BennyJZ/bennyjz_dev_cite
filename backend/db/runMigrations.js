@@ -15,6 +15,14 @@ async function dropDb(){
     await xp_cards.drop(db)
 }
 
-setUpDb()
-dropDb()
+async function emptyDb(){
+    await users.empty(db)
+    await credentials.empty(db)
+    await xp_cards.empty(db)
+}
 
+// setUpDb()
+// dropDb()
+// emptyDb()
+
+    await xp_cards.empty(db)

@@ -42,19 +42,10 @@ async function deleteUser(id){
     }
 }
 
-async function clearTable(){
-    try {
-        await db.query("TRUNCATE TABLE credentials CASCADE")
-    } catch (error) {
-        console.error(error.message)
-        throw error;
-    }
-}
 
 export {
     createRow,
     getRowByUserId,
     updateCredentials,
-    deleteUser,
-    clearTable
+    deleteUser
 }

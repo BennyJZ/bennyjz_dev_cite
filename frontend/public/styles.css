@@ -19,7 +19,7 @@ button{
 	--accText: rgba(238, 238, 238, 0.55);
 	--accDark: rgba(142, 22, 22, 1);
 	--accLight: rgba(255, 215, 0, 0.25);
-	--staff: url("../src/assets/staff.png"), auto;
+	--staff: url("../src/assets/staff_loop.gif"), auto;
 }
 
 .dark {

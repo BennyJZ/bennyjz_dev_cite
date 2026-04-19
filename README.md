@@ -6,10 +6,8 @@ REMEMBER TO TURN ON TAILSCALE BEFORE STARTIN PROJECT
 - [ ] Connect Project Card templates to database
 - [ ] Add a new window to see comments and add comments/delete comments (see edited comments? (Compare Created_at and Updated_at timestamp, to show its been edited))
 
-
-Consider Adding 2 new props for Likes and Comments:
-- [ ] Likes counter & Comments counter
-See: <ProjCard imgSrc={wuSprite} link={"https://google.com"} title={"PROJECT NAME"} desc={"THE DESCRIPTION OF THE PROEJECT"} tag={["Name","Of","the","tags"]}/>
+- [ ]Consider Adding 2 new props for Likes and Comments.
+See Component: <ProjCard imgSrc={wuSprite} link={"https://google.com"} title={"PROJECT NAME"} desc={"THE DESCRIPTION OF THE PROEJECT"} tag={["Name","Of","the","tags"]}/>
 
 Projects to Add:
 - [ ] chinaTwang v1 website

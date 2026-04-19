@@ -1,8 +1,11 @@
+REMEMBER TO TURN ON TAILSCALE BEFORE STARTIN PROJECT
+
 - [ ] Desgin DB: Make new Table for Projects
 - [ ] Connect Projects table <--> Likes and Comments, connect likes and comments <--> Users
 - [ ] Create new js + db.query CRUD connections to manipulate db tables
 - [ ] Connect Project Card templates to database
-- [ ] Add a new window to see comments and add comments/delete comments (see edited comments? (Compare Created_at and Updated_at timestamp, to show its been edited)) 
+- [ ] Add a new window to see comments and add comments/delete comments (see edited comments? (Compare Created_at and Updated_at timestamp, to show its been edited))
+
 
 Consider Adding 2 new props for Likes and Comments:
 - [ ] Likes counter & Comments counter

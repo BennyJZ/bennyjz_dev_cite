@@ -1,10 +1,9 @@
-import { baseurl } from "../../..";
 
 function Logout(){
     async function handleSubmit(e){
         e.preventDefault()
 
-        await fetch(baseurl+"/auth/logout",{
+        await fetch(import.meta.env.VITE_BASEURL + "/auth/logout",{
             method:"POST",
             credentials:"include"
         });

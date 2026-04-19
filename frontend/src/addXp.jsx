@@ -1,4 +1,3 @@
-import { useNavigate } from "react";
 
 function AddXp(){
     async function handleSubmit(e){
@@ -16,7 +15,7 @@ function AddXp(){
         const data = {...formdata,
             tag:formdata.tag.split(","),
             link:newLink}
-        const res = await fetch("http://localhost:3000/api/addxp",{
+        const res = await fetch(import.meta.env.VITE_BASEURL + "/api/addxp",{
             method:"POST",
             credentials:"include",
             headers:{"Content-Type":"application/json",},

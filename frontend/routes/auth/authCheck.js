@@ -1,7 +1,7 @@
-const baseurl = "http://localhost:3000"
 
 async function checkAuth(){
-    const res = await fetch(baseurl+"/authCheck",{
+    console.log(import.meta.env.VITE_BASEURL)
+    const res = await fetch(import.meta.env.VITE_BASEURL + "/authCheck",{
         method:"GET",
         credentials:"include"
     })

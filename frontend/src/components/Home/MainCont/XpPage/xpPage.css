@@ -7,12 +7,14 @@
     gap: 1rem;
 }
 
-.xpCont:hover .xpCard {
+.xpActCont:hover .xpCard {
     opacity: 0.3;
 }
 
 
-.xpCont:hover .xpCard:hover {
+.xpActCont:hover .xpCard:hover {
+    background-color: rgba(238, 238, 238, 0.02);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5), 0 2px 5px 0 rgba(0, 0, 0, 0.40);
     opacity: 1;
 }
 

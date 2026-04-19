@@ -1,4 +1,5 @@
-.xpCard{
+
+.projCard{
     display: flex;
     gap: 1rem;
     padding: 1rem;
@@ -6,27 +7,31 @@
     transition: 300ms;
 }
 
-.xpDate{
-    min-width: fit-content;
+.projImage{
+    width: fit-content;
 }
 
-.xpDesc{
+.projImage img{
+    border: solid 2px var(--accDark);
+    max-width: 200px;
+    min-width: 130px;
+}
+
+.projDesc{
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 
     height: 100%;
 }
-
-.xpDesc .xpP{
+.projDesc .projP{
     overflow-y: auto;
     max-height: 200px;
 }
 
-.xpTitle{
+.projTitle{
     transition: 300ms;
 }
-
 
 .icon{
     display: inline-block;
@@ -34,20 +39,20 @@
     transition: 300ms;
 }
 
-.xpCard:hover .xpTitle{
+.projCard:hover .projTitle{
     color: var(--accDark);
 }
 
 
-.xpCard:hover .icon{
+.projCard:hover .icon{
     transform: translate(3px, -3px);
 }
 
-.xpCardCont{
+
+.projCardCont{
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    height: 100%;
 }
 
 .tagCont{
@@ -56,11 +61,24 @@
     gap: 0.5rem;
 }
 
-.xpTagWrap{
+.projTagWrap{
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 10px;
     background-color: rgba(142, 22, 22, 0.2);
     border-radius: 20px;
+}
+
+.projCardWrap{
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+}
+
+.ratingIcon{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }

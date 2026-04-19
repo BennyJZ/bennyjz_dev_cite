@@ -26,7 +26,6 @@ function Home(){
 
         async function load(){
             const result = await checkAuth()
-            console.log(result)
             setAuth(result.authenticated)
         }
         load();

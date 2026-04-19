@@ -1,5 +1,5 @@
+
 import {Link} from "react-router-dom"
-import { baseurl } from "../../..";
 
 function LoginForm(){
 
@@ -8,7 +8,7 @@ function LoginForm(){
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData);
 
-        await fetch(baseurl+"/auth/login",{
+        await fetch(import.meta.env.VITE_BASEURL + "/auth/login",{
             method:"POST",
             credentials:"include",
             headers:{"Content-Type":"application/json"},

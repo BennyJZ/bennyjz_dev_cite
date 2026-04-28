@@ -11,7 +11,6 @@ async function createRow({date,work_title, description, tag, link}){
     }
 }
 
-
 async function getTable(){
     try {
         const res = await db.query("SELECT * FROM xp_cards ORDER BY created_at DESC");
@@ -41,7 +40,7 @@ async function updateXpCards(id, columnName, value){
 
 async function deleteXpCard(id){
     try {
-        const res = await db.query("DELETE FROM cp_cards WHERE id=$1 RETURNING *",
+        const res = await db.query("DELETE FROM xp_cards WHERE id=$1 RETURNING *",
             [id]
         )
         return res.rows[0] || null

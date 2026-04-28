@@ -11,7 +11,7 @@ function TitleName(){
             <div className="nameTitleCont">
                 <div className={redHover}></div>
                 <h1 onMouseEnter={()=>{setRedHover("HoverTitle")}} className="Cn">
-                    Benny Jan Zhuang
+                    Place Holder
                 </h1>
                 <h1 onMouseEnter={()=>{setRedHover("HoverTitle ActiveCn")}} style={{width: "fit-content"}} className="Cn">
                     庄阳

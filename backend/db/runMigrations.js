@@ -45,22 +45,31 @@ async function dropDb(){
 
 async function emptyDb(){
     try {
-        await users.empty(db)
-        await credentials.empty(db)
-        await xp_cards.empty(db)
-        
         await proj_cards.empty(db)
         await proj_comments.empty(db)
         await proj_likes.empty(db)
         await proj_replies.empty(db)
+
+        await xp_cards.empty(db)
+        await credentials.empty(db)
+        await users.empty(db)
     } catch (error) {
         console.error(error)
         throw error
     }
 }
 
+async function tempSetup(){
+
+    await users.create(db)
+    await credentials.create(db)
+    await proj_cards.create(db)
+    await proj_comments.create(db)
+    await proj_likes.create(db)
+    await proj_replies.create(db)
+}
+
+tempSetup()
 // setUpDb()
 // dropDb()
 // emptyDb()
-
-    await xp_cards.empty(db)

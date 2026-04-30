@@ -6,33 +6,19 @@ function AddProj(){
     async function handleSubmit(e){
         e.preventDefault()
         const formData = new FormData(e.target)
-        const formdata = Object.fromEntries(formData)
 
-        const newLink = (()=>{
-        if(!formdata.link.includes("https://")) {
-            return `https://${formdata.link}`
-        }else {
-            return formdata.link
-        }})()
-
-        const data = {...formdata,
-            tag:formdata.tag.split(","),
-            link:newLink}
-
-        console.log(data)
-
-        const res = await fetch(import.meta.env.VITE_BASEURL + "/api/projects/createproj",{
+        await fetch(import.meta.env.VITE_BASEURL + "/api/projects/createproj",{
             method:"POST",
             credentials:"include",
-            headers:{"Content-Type":"application/json",},
-            body:JSON.stringify(data)
+            body: formData
         })
-        // window.location.href = "/"
+        window.location.href = "/"
     }
     function handleChange(e) {
         const file = e.target.files[0]
         setFileName(file ? file.name : "No file selected")
     }
+
 
 
     return(<>

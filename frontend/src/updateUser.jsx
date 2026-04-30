@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Active from "./components/ActivityIcon/ActivityIcon";
 import { useState } from "react";
-import checkAuth from "../routes/auth/authCheck";
+import checkAuth from "@/routes/auth/authCheck";
 import { useEffect } from "react";
 
 function UpdateUser(){
@@ -38,7 +38,7 @@ function UpdateUser(){
         const data = Object.fromEntries(formData)
         console.log(data.confPswd)
         if (data.newPswd === data.confPswd){
-            await fetch(import.meta.env.VITE_BASEURL + "/api/users/updateuser",{
+            await fetch(import.meta.env.VITE_BASEURL + "/api/updateuser",{
             method:"POST",
             credentials:"include",
             headers:{

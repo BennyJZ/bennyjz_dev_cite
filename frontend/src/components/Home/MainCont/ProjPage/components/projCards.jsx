@@ -4,29 +4,37 @@ import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import Ptags from "./pTags";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CommentIcon from '@mui/icons-material/Comment';
+// import checkAuth from "../../../../../../routes/auth/authCheck";
+import checkAuth from "@/routes/auth/authCheck";
+
 
 function ProjCard(props){
     const [width, setWidth] = useState(window.innerWidth)
+    const [auth, setAuth] = useState(false)
     const flexRow = {flexDirection:"row"}
     const flexCol = {flexDirection:"column"}
-
-    
 
     useEffect(()=>{
         function handleResize(){
             setWidth(window.innerWidth)
         }
 
+        (async ()=>{
+            const user = await checkAuth()
+            console.log(user.authenticated)
+        })()
         window.addEventListener("resize", handleResize)
         return()=>{
             window.removeEventListener("resize", handleResize)
         }
     },[])
+
+
     return(<>
         <a href={props.link}>
             <div className="projCard" style={width<800?flexCol:flexRow}>
                 <div className="projImage">
-                    <img src={props.imgSrc} alt="Project Picture" />
+                    <img src={`${import.meta.env.VITE_BASEURL}/api/projects/projimage/`+props.imgSrc} alt="Project Picture" />
                 </div>
                 <div className="projCardWrap">
                     <div className="projCardCont">

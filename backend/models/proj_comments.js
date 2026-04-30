@@ -15,7 +15,6 @@ async function createRow({user_id, proj_id, content}){
     }
 }
 
-
 async function getTable(){
     try {
         const res = await db.query("SELECT * FROM proj_comments ORDER BY created_at DESC");

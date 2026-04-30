@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import checkAuth from "../../../routes/auth/authCheck";
+import checkAuth from "@/routes/auth/authCheck";
 import { useState, useRef } from "react";
 import Active from "../ActivityIcon/ActivityIcon";
 import AboutPage from "./MainCont/AboutPage/aboutPage";
@@ -71,6 +71,7 @@ function Home(){
 
     return(
     <>
+    <Active />
     {(width<800)?<ContactBar />:null}
         
     <section>

@@ -5,6 +5,7 @@ import LoginForm from "./components/Buttons/Login.jsx"
 import Home from "./components/Home/home.jsx"
 import UpdateUser from "./updateUser.jsx"
 import AddXp from "./addXp.jsx"
+import AddProj from "./addProj.jsx"
 
 
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/login" element={<LoginForm />}/>
         <Route path="/updateUser" element={<UpdateUser />}/>
         <Route path="/addxp" element={<AddXp />}/>
+        <Route path="/addproj" element={<AddProj />}/>
       </Routes>
     </BrowserRouter>
   )

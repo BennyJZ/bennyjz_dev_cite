@@ -38,7 +38,7 @@ function UpdateUser(){
         const data = Object.fromEntries(formData)
         console.log(data.confPswd)
         if (data.newPswd === data.confPswd){
-            await fetch(import.meta.env.VITE_BASEURL + "/api/updateuser",{
+            await fetch(import.meta.env.VITE_BASEURL + "/api/users/updateuser",{
             method:"POST",
             credentials:"include",
             headers:{

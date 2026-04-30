@@ -56,3 +56,22 @@ section{
 	align-items: center;
 	flex-direction: column;
 }
+
+form{
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	width: 25%;
+}
+
+.imageInput{
+	font: inherit;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 10rem;
+	height: 10rem;
+	border: dashed;
+	border-radius: 25px;
+}

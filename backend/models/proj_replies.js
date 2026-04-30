@@ -27,6 +27,17 @@ async function getTable(){
 }
 
 // GET LIST OF REPLIES FROM SPECIFIC USER, USE PROJECT_COMMENT_ID and USER ID
+async function getRepliesByUser(user_id) {
+    try {
+        const res = await db.query("SELECT * FROM proj_comment_replies WHERE user_id=$1",
+            [user_id]
+        )
+        return res.rows
+    } catch (error) {
+        console.error(error)
+        throw error;
+    }
+}
 
 async function updateProjReplies(id, columnName, value){
     try {

@@ -24,6 +24,18 @@ async function getTable(){
 
 // GET LIST OF LIKES BY SPECIFIC USERS, or SPECIFIC PROJECTS
 
+async function getLikesByUser(user_id){
+    try {
+        const res = await db.query("SELECT * FROM proj_likes WHERE user_id=$1",
+            [user_id]
+        )
+        return res.rows
+    } catch (error) {
+        console.error(error)
+        throw error
+    }
+}
+
 async function deleteProjLikes(user_id, proj_id){
     try {
         const res = await db.query("DELETE FROM proj_likes WHERE user_id=$1 AND proj_id=$2 RETURNING *",

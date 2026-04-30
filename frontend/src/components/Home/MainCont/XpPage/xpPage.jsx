@@ -9,7 +9,7 @@ function XpPage(props){
     const [width, setWidth] = useState(window.innerWidth)
 
     async function getXp(){
-        const res = await fetch(import.meta.env.VITE_BASEURL + "/api/getxp",{
+        const res = await fetch(import.meta.env.VITE_BASEURL + "/api/experience/getxp",{
         method:"GET",
         credentials:"include",
         })

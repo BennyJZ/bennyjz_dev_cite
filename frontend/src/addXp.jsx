@@ -15,7 +15,7 @@ function AddXp(){
         const data = {...formdata,
             tag:formdata.tag.split(","),
             link:newLink}
-        const res = await fetch(import.meta.env.VITE_BASEURL + "/api/addxp",{
+        const res = await fetch(import.meta.env.VITE_BASEURL + "/api/experience/addxp",{
             method:"POST",
             credentials:"include",
             headers:{"Content-Type":"application/json",},

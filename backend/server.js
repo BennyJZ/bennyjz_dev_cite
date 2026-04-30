@@ -9,6 +9,7 @@ import dotenv from "dotenv"
 dotenv.config({path: new URL("./.env","file:///Users/benz/Desktop/bennyjz/")})
 import path from "path";
 import {fileURLToPath} from "url";
+import multer from "multer"
 
 import cors from "cors";
 
@@ -18,7 +19,10 @@ const app = express();
 const _filename = fileURLToPath(import.meta.url);
 const _dirname = path.dirname(_filename)
 
+const assetsPath = path.join(_dirname,"assets")
 const reactPath = path.join(_dirname,"..","frontend","dist")
+
+const upload = multer({dest:assetsPath})
 
 app.use(express.static(reactPath));
 

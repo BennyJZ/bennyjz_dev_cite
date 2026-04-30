@@ -27,6 +27,17 @@ async function getTable(){
 }
 
 // GET LIST OF COMMENTS BY ONLY USER, USING PROJECT_ID AND USER_ID
+async function getCommentsByUser(user_id) {
+    try {
+        const res = await db.query("SELECT * FROM proj_comments WHERE user_id=$1",
+            [user_id]
+        )
+        return res.rows
+    } catch (error) {
+        console.error(error)
+        throw error
+    }
+}
 
 async function updateProjComment(id, columnName, value){
     try {

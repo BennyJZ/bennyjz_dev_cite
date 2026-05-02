@@ -36,9 +36,9 @@ async function getLikesByUser(user_id){
     }
 }
 
-async function deleteProjLikes(user_id, proj_id){
+async function deleteProjLikes({user_id, proj_id}){
     try {
-        const res = await db.query("DELETE FROM proj_likes WHERE user_id=$1 AND proj_id=$2 RETURNING *",
+        const res = await db.query("DELETE FROM proj_likes WHERE user_id=$1 AND proj_id=$2",
             [user_id, proj_id]
         )
         return res.rows[0] || null
@@ -51,5 +51,6 @@ async function deleteProjLikes(user_id, proj_id){
 export {
     createRow,
     getTable,
+    getLikesByUser,
     deleteProjLikes
 }

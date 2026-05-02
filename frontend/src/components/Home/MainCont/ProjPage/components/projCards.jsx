@@ -4,7 +4,7 @@ import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import Ptags from "./pTags";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CommentIcon from '@mui/icons-material/Comment';
-// import checkAuth from "../../../../../../routes/auth/authCheck";
+// import checkAuth from "@/routes/auth/authCheck";
 import checkAuth from "@/routes/auth/authCheck";
 
 
@@ -14,14 +14,25 @@ function ProjCard(props){
     const flexRow = {flexDirection:"row"}
     const flexCol = {flexDirection:"column"}
 
+    async function getLikes(){
+        const res = await fetch(import.meta.env.VITE_BASEURL + "/api/projects/getlikes", {
+            method:"GET",
+            credentials:"include"
+        })
+        const data = await res.json()
+        console.log(data)
+    }
+
+
+
     useEffect(()=>{
         function handleResize(){
             setWidth(window.innerWidth)
         }
 
         (async ()=>{
+            await getLikes()
             const user = await checkAuth()
-            console.log(user.authenticated)
         })()
         window.addEventListener("resize", handleResize)
         return()=>{
@@ -29,8 +40,8 @@ function ProjCard(props){
         }
     },[])
 
-
     return(<>
+    <div className="cardWrap">
         <a href={props.link}>
             <div className="projCard" style={width<800?flexCol:flexRow}>
                 <div className="projImage">
@@ -48,12 +59,20 @@ function ProjCard(props){
                             })}
                         </div>
                     </div>
-                    <div className="ratingIcon">
-                        <FavoriteIcon /> <CommentIcon />
-                    </div>
                 </div>
             </div>
         </a>
+        <div className="ratingIcon">
+            <div className="ratingIconCont">
+                <FavoriteIcon onClick={props.onLike} style={props.color}/>
+                <div className="likeCount">0</div>
+            </div>
+            <div className="ratingIconCont">
+                <CommentIcon />
+                <div className="commentCount">0</div>
+            </div>
+        </div>
+    </div>
     </>)
 }
 

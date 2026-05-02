@@ -7,6 +7,12 @@
     transition: 300ms;
 }
 
+.cardWrap > a{
+    flex: 1;
+    min-width: 0;
+    display: block;
+}
+
 .projImage{
     width: fit-content;
 }
@@ -23,9 +29,9 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-
     height: 100%;
 }
+
 .projDesc .projP{
     overflow-y: auto;
     max-height: 200px;
@@ -74,13 +80,27 @@
 
 .projCardWrap{
     display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    width: 100%;
 }
 
 .ratingIcon{
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
+    gap: 1rem;
+    padding-top: 1rem;
+}
+
+.likeCount{
+    display: flex;
+    justify-content: center;
+}
+
+.commentCount{
+    display: flex;
+    justify-content: center;
+}
+
+.cardWrap{
+    display: flex;
     gap: 1rem;
 }

@@ -1,6 +1,5 @@
 
 async function checkAuth(){
-    console.log(import.meta.env.VITE_BASEURL)
     const res = await fetch(import.meta.env.VITE_BASEURL + "/authCheck",{
         method:"GET",
         credentials:"include"

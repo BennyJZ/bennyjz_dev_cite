@@ -40,7 +40,6 @@ export default function projectRouting(upload){
 
     router.get("/projimage/{*name}",(req, res, next)=>{
         const imagePath = path.join(_dirname,"..","..",req.params.name.join("/"))
-        console.log(imagePath)
         res.type("image/jpeg")
         res.sendFile(imagePath)
     })

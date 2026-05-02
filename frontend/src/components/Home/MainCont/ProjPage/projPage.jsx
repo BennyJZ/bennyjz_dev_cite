@@ -8,8 +8,10 @@ function ProjPage(){
     const [width, setWidth] = useState(window.innerWidth)
     const [projData, setProjData] = useState([])
     const [likeData, setLikeData] = useState([])
+    const [likeCount, setLikeCount] = useState([])
+    const [commentCount, setCommentCount] = useState(0)
 
-    async function checkLike(){
+    async function getUserLikes(){
         const res = await fetch(import.meta.env.VITE_BASEURL + "/api/projects/getuserlikes", {
             method:"GET",
             credentials:"include"
@@ -27,22 +29,31 @@ function ProjPage(){
         return data;
     }
 
+    async function getLikes(){
+        const res = await fetch(import.meta.env.VITE_BASEURL + "/api/projects/getlikes", {
+            method:"GET",
+            credentials:"include"
+        })
+        const data = await res.json()
+        return data
+    }
+
     async function sendLike(projId){
-        
         await fetch(import.meta.env.VITE_BASEURL + "/api/projects/like",{
             method:"POST",
             credentials:"include",
             headers:{"Content-Type":"application/json"},
             body: JSON.stringify({proj_id:projId})
         })
-        
-        const res = await checkLike()
+
+        const theLikes = await getLikes()
+        setLikeCount(theLikes)
+
+        const res = await getUserLikes()
         setLikeData(res)
-        console.log(`updatedList: ${likeData}`)
     }
 
     useEffect(()=>{
-
         function handleResize(){
             setWidth(window.innerWidth)
         }
@@ -51,9 +62,12 @@ function ProjPage(){
             const proj = await getProj()
             setProjData(proj)
 
+            const theLikes = await getLikes()
+            setLikeCount(theLikes)
+
             const auth = await checkAuth()
             if (auth.authenticated){
-                const like = await checkLike()
+                const like = await getUserLikes()
                 setLikeData(like)
             }
         })()
@@ -69,7 +83,8 @@ function ProjPage(){
         <div className={`projCont ${width<800?null:"projActCont"}`}>
             {projData.map(item=>{
                 const isLiked = likeData.some(i=>i.proj_id === item.id)
-                return <ProjCard key={item.id} id={item.id} imgSrc={item.image_url} link={item.link} title={item.proj_title} desc={item.description} tag={item.tag} color={isLiked?{color:"red"}:null} onLike={()=>sendLike(item.id)}/>
+                const thisCard = likeCount.filter(i=> i.proj_id === item.id)
+                return <ProjCard key={item.id} id={item.id} imgSrc={item.image_url} link={item.link} title={item.proj_title} desc={item.description} tag={item.tag} color={isLiked?{color:"red"}:null} onLike={()=>sendLike(item.id)} likeCounter={thisCard.length} commentCounter={commentCount}/>
             })}
         </div>
     </div>

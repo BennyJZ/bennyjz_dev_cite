@@ -14,16 +14,6 @@ function ProjCard(props){
     const flexRow = {flexDirection:"row"}
     const flexCol = {flexDirection:"column"}
 
-    async function getLikes(){
-        const res = await fetch(import.meta.env.VITE_BASEURL + "/api/projects/getlikes", {
-            method:"GET",
-            credentials:"include"
-        })
-        const data = await res.json()
-        console.log(data)
-    }
-
-
 
     useEffect(()=>{
         function handleResize(){
@@ -31,8 +21,8 @@ function ProjCard(props){
         }
 
         (async ()=>{
-            await getLikes()
             const user = await checkAuth()
+            setAuth(user.authenticated)
         })()
         window.addEventListener("resize", handleResize)
         return()=>{
@@ -64,12 +54,12 @@ function ProjCard(props){
         </a>
         <div className="ratingIcon">
             <div className="ratingIconCont">
-                <FavoriteIcon onClick={props.onLike} style={props.color}/>
-                <div className="likeCount">0</div>
+                <FavoriteIcon onClick={auth?props.onLike:null} style={props.color}/>
+                <div className="likeCount">{props.likeCounter}</div>
             </div>
             <div className="ratingIconCont">
                 <CommentIcon />
-                <div className="commentCount">0</div>
+                <div className="commentCount">{props.commentCounter}</div>
             </div>
         </div>
     </div>

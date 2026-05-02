@@ -1,10 +1,12 @@
+.cardWrap{
+    transition: 300ms;
+    padding: 1rem;
+    border-radius: 5px;
+}
 
 .projCard{
     display: flex;
     gap: 1rem;
-    padding: 1rem;
-    border-radius: 5px;
-    transition: 300ms;
 }
 
 .cardWrap > a{

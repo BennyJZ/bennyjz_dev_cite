@@ -13,8 +13,10 @@ export default function projectLikesRouter(){
     })
 
     router.get("/getlikes", async (req, res)=>{
+        const likesArray = []
         const result = await projLikes.getTable()
-        result.rows.map(item=>{item.proj_id})
+        result.rows.map(item=>{likesArray.push({proj_id:item.proj_id})})
+        res.status(200).json(likesArray)
     })
 
     router.post("/like",async (req, res)=>{
@@ -34,9 +36,3 @@ export default function projectLikesRouter(){
 
     return router
 }
-
-
-// REMEMBER TO ADD A TOGGLE LIKE OR NO LIKE FUNCTION, MAYBE RETURN PROJECT ID, 
-// IF USER LIKES A PROJECT THEN ITERATE AND SEE IF WE SHOULD RETURN A LIKE OR NOT
-// FRONTEND: IF USER AUTHENTICATED > USER LIKES PROJECT > RETURN PROJECT ID.
-// BACKEND: RECIEVE PROJECT ID, ITERATE PROJ_LIKES LIST.INCLUDES PROJECT_ID AND USER_ID. 

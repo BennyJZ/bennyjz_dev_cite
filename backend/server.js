@@ -30,14 +30,11 @@ app.use(cors({ origin: process.env.FRONTEND, credentials:true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave:false,
     saveUninitialized:false
 }));
-
-
 
 app.use(passport.initialize())
 app.use(passport.session())

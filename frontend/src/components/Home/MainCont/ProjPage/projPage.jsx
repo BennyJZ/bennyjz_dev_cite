@@ -84,7 +84,7 @@ function ProjPage(){
             {projData.map(item=>{
                 const isLiked = likeData.some(i=>i.proj_id === item.id)
                 const thisCard = likeCount.filter(i=> i.proj_id === item.id)
-                return <ProjCard key={item.id} id={item.id} imgSrc={item.image_url} link={item.link} title={item.proj_title} desc={item.description} tag={item.tag} color={isLiked?{color:"red"}:null} onLike={()=>sendLike(item.id)} likeCounter={thisCard.length} commentCounter={commentCount}/>
+                return <ProjCard key={item.id} id={item.id} imgSrc={item.image_url} link={item.link} title={item.proj_title} desc={item.description} tag={item.tag} color={isLiked?{color:"var(--accDark)"}:null} onLike={()=>sendLike(item.id)} likeCounter={thisCard.length} commentCounter={commentCount}/>
             })}
         </div>
     </div>

@@ -3,6 +3,9 @@
     padding: 1rem;
     border-radius: 5px;
 }
+.commentWrap{
+    padding: 1rem 0 0 1rem;
+}
 
 .projCard{
     display: flex;
@@ -90,6 +93,10 @@
     flex-shrink: 0;
     gap: 1rem;
     padding-top: 1rem;
+}
+
+.theIcon:hover{
+    cursor: var(--staff);
 }
 
 .likeCount{

@@ -4,6 +4,7 @@ import {fileURLToPath} from "url";
 import * as proj from "../../models/proj_cards.js"
 import * as user from "../../models/users.js"
 import projectLikesRouter from "./projectlikes.js";
+import projCommentsRouter from "./project_comments.js";
 
 
 const _filename = fileURLToPath(import.meta.url);
@@ -13,6 +14,7 @@ export default function projectRouting(upload){
     const router = express.Router()
 
     router.use(projectLikesRouter())
+    router.use(projCommentsRouter())
 
     router.post("/createproj", upload.single("image"),async (req, res, next)=>{
 

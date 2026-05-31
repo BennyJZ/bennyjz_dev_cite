@@ -4,8 +4,6 @@ import "./titleName.css"
 function TitleName(){
     const [redHover, setRedHover] = useState("HoverTitle")
 
-
-
     return(
         <>
             <div className="nameTitleCont">

@@ -9,6 +9,7 @@ export default function authRouter(){
     const router = express.Router();
 
     router.post("/login",(req,res,next)=>{passport.authenticate("local",(err, user)=>{
+                console.log("LOGIN FAIL")
         if (err) {
             return next(err)
         }

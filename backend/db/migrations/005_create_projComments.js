@@ -1,11 +1,11 @@
 async function create(db) {
     try {
-        await db.query("CREATE TABLE proj_comments (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), user_id UUID, proj_id UUID NOT NULL, content TEXT NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, CONSTRAINT fkey_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL, CONSTRAINT fkey_proj FOREIGN KEY (proj_id) REFERENCES proj_cards(id) ON DELETE CASCADE)")
+        await db.query("CREATE TABLE proj_comments (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), user_id UUID, proj_id UUID NOT NULL, content TEXT NOT NULL, link TEXT, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, CONSTRAINT fkey_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE, CONSTRAINT fkey_proj FOREIGN KEY (proj_id) REFERENCES proj_cards(id) ON DELETE CASCADE)")
     } catch (error) {
         console.error(error)
         throw error
     }
-}''
+}
 
 async function drop(db) {
     try {

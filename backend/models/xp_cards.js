@@ -14,7 +14,7 @@ async function createRow({date,work_title, description, tag, link}){
 async function getTable(){
     try {
         const res = await db.query("SELECT * FROM xp_cards ORDER BY created_at DESC");
-        return res
+        return res.rows
     } catch (error) {
         console.error(error)
         throw error;

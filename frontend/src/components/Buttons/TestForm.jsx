@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "@/api/config.js";
 import {Link, useNavigate} from "react-router-dom"
 import Active from "../ActivityIcon/ActivityIcon";
 
@@ -13,8 +14,9 @@ function TestForm(){
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData);
 
-        await fetch(import.meta.env.VITE_BASEURL + "/auth/register", {
+        await fetch(API_BASE_URL + "/auth/register", {
         method: "POST",
+        credentials:"include",
         headers: {
         "Content-Type": "application/json",
         },

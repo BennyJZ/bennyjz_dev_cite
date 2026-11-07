@@ -1,6 +1,5 @@
 import pkg from "pg"
-import dotenv from "dotenv"
-dotenv.config({path: new URL("./.env","file:///Users/benz/Desktop/bennyjz/")})
+import "../config/env.js"
 
 const db = new pkg.Pool({
     host:process.env.PG_HOST,

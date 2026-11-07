@@ -9,7 +9,6 @@ export default function authRouter(){
     const router = express.Router();
 
     router.post("/login",(req,res,next)=>{passport.authenticate("local",(err, user)=>{
-                console.log("LOGIN FAIL")
         if (err) {
             return next(err)
         }
@@ -28,19 +27,19 @@ export default function authRouter(){
 
     router.post("/updateuser",requireAuth("admin","guest","owner"), async (req,res,next)=>{
         try {
-            encryptPass(req.user.id, req.body.confPswd)
+            await encryptPass(req.user.id, req.body.confPswd)
             res.sendStatus(200)
         } catch (error) {
             next(error)
         }
     })
 
-    router.post("/register", async (req, res, next)=>{
+    router.post("/register",requireAuth("admin","owner"), async (req, res, next)=>{
         try {
             const {username, email, phone, role, password} = req.body;
             const result = await user.createRow({username, email, phone, role});
             await encryptPass(result.id,password)
-            res.redirect("/").json({ message: "User created" });
+            res.status(201).json({ message: "User created" });
         } catch (error) {
             next(error)
         }

@@ -1,7 +1,8 @@
+import { API_BASE_URL } from "@/api/config.js";
 import { useNavigate } from "react-router-dom";
 import Active from "./components/ActivityIcon/ActivityIcon";
 import { useState } from "react";
-import checkAuth from "@/routes/auth/authCheck";
+import checkAuth from "@/api/authCheck";
 import { useEffect } from "react";
 
 function UpdateUser(){
@@ -19,7 +20,7 @@ function UpdateUser(){
             setAuth(result.authenticated)
         }
         load()
-    })
+    }, [])
 
     function onChange(e){
         const {name, value} = e.target
@@ -36,9 +37,8 @@ function UpdateUser(){
 
         const formData = new FormData(e.target)
         const data = Object.fromEntries(formData)
-        console.log(data.confPswd)
         if (data.newPswd === data.confPswd){
-            await fetch(import.meta.env.VITE_BASEURL + "/api/updateuser",{
+            const res = await fetch(API_BASE_URL + "/auth/updateuser",{
             method:"POST",
             credentials:"include",
             headers:{
@@ -46,8 +46,8 @@ function UpdateUser(){
             },
             body:JSON.stringify(data),
         })
-        if(res.status === 401){
-            {status:false}
+        if(!res.ok){
+            return {status:false}
         }else{
             navigate("/")
             return {status:true}

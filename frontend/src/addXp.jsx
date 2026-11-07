@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "@/api/config.js";
 
 function AddXp(){
     async function handleSubmit(e){
@@ -15,7 +16,7 @@ function AddXp(){
         const data = {...formdata,
             tag:formdata.tag.split(","),
             link:newLink}
-        const res = await fetch(import.meta.env.VITE_BASEURL + "/api/experience/addxp",{
+        await fetch(API_BASE_URL + "/api/experience/addxp",{
             method:"POST",
             credentials:"include",
             headers:{"Content-Type":"application/json",},

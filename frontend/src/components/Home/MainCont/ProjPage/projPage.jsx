@@ -1,18 +1,18 @@
+import { API_BASE_URL } from "@/api/config.js";
 import "./projPage.css"
 import ProjCard from "./components/projCards";
 import {useState, useEffect} from "react"
-import checkAuth from "@/routes/auth/authCheck";
+import useWindowWidth from "@/hooks/useWindowWidth.js"
+import checkAuth from "@/api/authCheck";
 
 function ProjPage(){
-    const [projActive, setProjActive] = useState(null)
-    const [width, setWidth] = useState(window.innerWidth)
+    const width = useWindowWidth()
     const [projData, setProjData] = useState([])
     const [likeData, setLikeData] = useState([])
     const [likeCount, setLikeCount] = useState([])
-    const [commentCount, setCommentCount] = useState(0)
 
     async function getUserLikes(){
-        const res = await fetch(import.meta.env.VITE_BASEURL + "/api/projects/getuserlikes", {
+        const res = await fetch(API_BASE_URL + "/api/projects/getuserlikes", {
             method:"GET",
             credentials:"include"
         })
@@ -21,7 +21,7 @@ function ProjPage(){
     }
 
     async function getProj(){
-        const res = await fetch(import.meta.env.VITE_BASEURL+"/api/projects/getproj",{
+        const res = await fetch(API_BASE_URL+"/api/projects/getproj",{
             method:"GET",
             credentials:"include",
         })
@@ -30,7 +30,7 @@ function ProjPage(){
     }
 
     async function getLikes(){
-        const res = await fetch(import.meta.env.VITE_BASEURL + "/api/projects/getlikes", {
+        const res = await fetch(API_BASE_URL + "/api/projects/getlikes", {
             method:"GET",
             credentials:"include"
         })
@@ -39,7 +39,7 @@ function ProjPage(){
     }
 
     async function sendLike(projId){
-        await fetch(import.meta.env.VITE_BASEURL + "/api/projects/like",{
+        await fetch(API_BASE_URL + "/api/projects/like",{
             method:"POST",
             credentials:"include",
             headers:{"Content-Type":"application/json"},
@@ -54,9 +54,6 @@ function ProjPage(){
     }
 
     useEffect(()=>{
-        function handleResize(){
-            setWidth(window.innerWidth)
-        }
 
         (async ()=>{
             const proj = await getProj()
@@ -72,10 +69,6 @@ function ProjPage(){
             }
         })()
 
-        window.addEventListener("resize", handleResize)
-        return ()=>{
-            window.removeEventListener("resize",handleResize)
-        }
     },[])
 
     return(<>
@@ -84,7 +77,7 @@ function ProjPage(){
             {projData.map(item=>{
                 const isLiked = likeData.some(i=>i.proj_id === item.id)
                 const thisCard = likeCount.filter(i=> i.proj_id === item.id)
-                return <ProjCard key={item.id} id={item.id} imgSrc={item.image_url} link={item.link} title={item.proj_title} desc={item.description} tag={item.tag} color={isLiked?{color:"var(--accDark)"}:null} onLike={()=>sendLike(item.id)} likeCounter={thisCard.length} commentCounter={commentCount}/>
+                return <ProjCard key={item.id} id={item.id} imgSrc={item.image_url} link={item.link} title={item.proj_title} desc={item.description} tag={item.tag} color={isLiked?{color:"var(--accDark)"}:null} onLike={()=>sendLike(item.id)} likeCounter={thisCard.length} commentCounter={0}/>
             })}
         </div>
     </div>
@@ -92,3 +85,4 @@ function ProjPage(){
 }
 
 export default ProjPage;
+

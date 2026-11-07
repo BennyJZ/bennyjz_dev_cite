@@ -1,6 +1,7 @@
-import { useEffect } from "react";
-import checkAuth from "@/routes/auth/authCheck";
-import { useState, useRef } from "react";
+import { HOME_SECTIONS } from "./sections.js";
+import useWindowWidth from "@/hooks/useWindowWidth.js"
+
+import { useEffect, useState, useRef } from "react";
 import Active from "../ActivityIcon/ActivityIcon";
 import AboutPage from "./MainCont/AboutPage/aboutPage";
 import XpPage from "./MainCont/XpPage/xpPage";
@@ -11,24 +12,16 @@ import HeroPage from "./Hero/heroPage";
 
 import "./home.css"
 
+const [aboutPage, experiencePage, projectPage] = HOME_SECTIONS;
+
 function Home(){
-    const [auth, setAuth] = useState(null)
-    const [width, setWidth] = useState(window.innerWidth)
+    const width = useWindowWidth()
     const [activePage, setActivePage] = useState(null);
     const refPage = useRef(null)
 
     //ADD FOR EVERY NEW SECTION IN .MainCont
-    const aboutPage = "ABOUT"
-    const experiencePage = "EXPERIENCE"
-    const projectPage = "PROJECT"
 
     useEffect(()=>{
-
-        async function load(){
-            const result = await checkAuth()
-            setAuth(result.authenticated)
-        }
-        load();
 
         //PAGE MAP BEHAVIOR: Wait for dom to exist useEffect
         function update(){
@@ -56,22 +49,17 @@ function Home(){
                 setActivePage(null);
             }
         }
-        function handleResize(){
-            setWidth(window.innerWidth)
-        }
 
-        window.addEventListener("scroll",onScroll)
-        window.addEventListener("resize",handleResize);
-        return () => {
-            window.removeEventListener("scroll",onScroll)
-            window.removeEventListener("resize", handleResize);
-        };
+            window.addEventListener("scroll",onScroll)
+            return () => {
+                window.removeEventListener("scroll",onScroll)
+            };
         },[])
 
 
     return(
     <>
-    <Active />
+    {(width<800)?null:<Active />}
     {(width<800)?<ContactBar />:null}
         
     <section>

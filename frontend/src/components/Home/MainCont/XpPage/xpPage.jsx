@@ -1,15 +1,16 @@
+import { API_BASE_URL } from "@/api/config.js";
 import "./xpPage.css"
 import XpCard from "./components/xpCard";
 import { useEffect, useState } from "react";
+import useWindowWidth from "@/hooks/useWindowWidth.js"
 
-function XpPage(props){
+function XpPage(){
 
     const [xpData, setXpData] = useState([])
-    const [xpActive, setXpActive] = useState(null)
-    const [width, setWidth] = useState(window.innerWidth)
+    const width = useWindowWidth()
 
     async function getXp(){
-        const res = await fetch(import.meta.env.VITE_BASEURL + "/api/experience/getxp",{
+        const res = await fetch(API_BASE_URL + "/api/experience/getxp",{
         method:"GET",
         credentials:"include",
         })
@@ -18,20 +19,11 @@ function XpPage(props){
     }
     
     useEffect(()=>{
-        function handleResize(){
-            setWidth(window.innerWidth)
-        }
-
         (async ()=>{
             const xp = await getXp()
             setXpData(xp)
         })()
 
-        window.addEventListener("resize", handleResize)
-
-        return()=>{
-            window.removeEventListener("resize",handleResize)
-        }
     },[])
 
 

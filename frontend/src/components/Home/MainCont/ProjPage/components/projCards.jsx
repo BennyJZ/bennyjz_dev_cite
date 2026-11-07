@@ -1,77 +1,37 @@
-import {useEffect, useState} from "react"
+import { API_BASE_URL } from "@/api/config.js";
+import { useEffect, useState } from "react";
+import useWindowWidth from "@/hooks/useWindowWidth.js"
 import "./projCard.css"
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import Ptags from "./pTags";
 import CommentSection from "./commentSection/commentSection";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CommentIcon from '@mui/icons-material/Comment';
-// import checkAuth from "@/routes/auth/authCheck";
-import checkAuth from "@/routes/auth/authCheck";
+import checkAuth from "@/api/authCheck";
 import Collapse from '@mui/material/Collapse';
 
 
 
 function ProjCard(props){
-    const [width, setWidth] = useState(window.innerWidth)
+    const width = useWindowWidth()
     const [auth, setAuth] = useState(false)
-    const [activeComment, setActiveComment] = useState(null)
     const [collapseComments, setCollapseComments] = useState(false)
+    const [commentCount, setCommentCount] = useState(0)
 
     const flexRow = {flexDirection:"row"}
     const flexCol = {flexDirection:"column"}
 
-    // IMPORTING SAMPLE COMMENTS:
-    const sampleComment = [{
-        commentId:"",
-        username: "theUserName",
-        content: "Hey there, how yall doing! Welcome to my cite :)",
-        link:"https://google.com",
-        createdAt:""
-    },
-    {
-        commentId:"",
-        username: "FAQ USER",
-        content: "I DONt HAve ALINK PLS LEAVE ME ALOONE",
-        link:null,
-        createdAt:""
-    },
-    {
-        commentId:"",
-        username: "FAQ USER",
-        content: "I DONt HAve ALINK PLS LEAVE ME ALOONE",
-        link:null,
-        createdAt:""
-    }]
-
-
     function handleCollapseComments() {
-
-        setCollapseComments(prev=>{
-            if (prev){
-                setActiveComment(null)
-                return false
-            } else {
-                setActiveComment("activeComment")
-                return true
-            }
-        })
+        setCollapseComments(prev => !prev)
     }
 
-
     useEffect(()=>{
-        function handleResize(){
-            setWidth(window.innerWidth)
-        }
-
         (async ()=>{
             const user = await checkAuth()
             setAuth(user.authenticated)
         })()
-        window.addEventListener("resize", handleResize)
-        return()=>{
-            window.removeEventListener("resize", handleResize)
-        }
-    },[])
+
+    },[props.id])
 
     return(<>
     <div>
@@ -79,7 +39,7 @@ function ProjCard(props){
             <a href={props.link}>
                 <div className="projCard" style={width<800?flexCol:flexRow}>
                     <div className="projImage">
-                        <img src={`${import.meta.env.VITE_BASEURL}/api/projects/projimage/`+props.imgSrc} alt="Project Picture" />
+                        <img src={`${API_BASE_URL}/api/projects/projimage/`+props.imgSrc} alt="Project Picture" />
                     </div>
                     <div className="projCardWrap">
                         <div className="projCardCont">
@@ -103,14 +63,16 @@ function ProjCard(props){
                 </div>
                 <div className="ratingIconCont">
                     <CommentIcon className="theIcon" onClick={handleCollapseComments} style={collapseComments?{color:"FFD700"}:null}/>
-                    <div className="commentCount">{sampleComment.length}</div>
+                    <div className="commentCount">{commentCount}</div>
                 </div>
             </div>
         </div>
-        {/* REMEMBER AUTH CHECK, ONLY ALLOW USERS TO COMMENT */}
         <Collapse in={collapseComments}> 
             <div className="commentWrap">
-                <CommentSection sampleComment={sampleComment}/>
+                <CommentSection
+                projId={props.id}
+                setCommentCount={setCommentCount}
+            />
             </div>
         </Collapse>
     </div>

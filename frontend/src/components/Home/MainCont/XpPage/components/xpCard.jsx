@@ -1,20 +1,10 @@
-import { useEffect, useState } from "react";
+import useWindowWidth from "@/hooks/useWindowWidth.js"
 import XpTags from "./tags";
 import "./xpCard.css"
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 
 function XpCard(props){
-    const [width, setWidth] = useState(window.innerWidth)
-
-    useEffect(()=>{
-        function handleResize(){
-            setWidth(window.innerWidth)
-        }
-        window.addEventListener("resize",handleResize)
-        return ()=>{
-            window.removeEventListener("resize",handleResize)
-        }
-    },[])
+    const width = useWindowWidth()
 
     const flexRow = {flexDirection:"row"}
     const flexCol = {flexDirection:"column"}

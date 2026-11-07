@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "@/api/config.js";
 import {useState} from "react";
 
 function AddProj(){
@@ -7,7 +8,7 @@ function AddProj(){
         e.preventDefault()
         const formData = new FormData(e.target)
 
-        await fetch(import.meta.env.VITE_BASEURL + "/api/projects/createproj",{
+        await fetch(API_BASE_URL + "/api/projects/createproj",{
             method:"POST",
             credentials:"include",
             body: formData

@@ -1,10 +1,10 @@
 
-import checkAuth from "../../../routes/auth/authCheck.js";
-import LoginForm from "../Buttons/Login.jsx";
-import Logout from "../Buttons/Logout.jsx";
+import checkAuth from "@/api/authCheck.js";
+import AuthButton from "../Buttons/AuthButton.jsx"
+import ActivityStatus from "./ActivityStatus.jsx"
 import "./ActivityIcon.css";
-import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+
 
 function Active(){
     const [auth, setAuth] = useState(null)
@@ -20,12 +20,9 @@ function Active(){
 
     return(
         <>
-        <div>{auth?<Logout />: <Link to="/login">Login</Link>}</div>
-        <div className="ActivityCont">
-            {auth? <div className="WelCont"><p>{user}</p></div>:null}
-            <div className="Activity">
-                {auth? <div className="greenDot" />: null }
-            </div>
+        <div className="ActivityIconCont">
+            <AuthButton auth={auth} />
+            <ActivityStatus auth={auth} user={user} />
         </div>
         </>
     )

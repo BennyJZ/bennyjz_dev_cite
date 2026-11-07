@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "@/api/config.js";
 
 import {Link} from "react-router-dom"
 
@@ -8,7 +9,7 @@ function LoginForm(){
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData);
 
-        await fetch(import.meta.env.VITE_BASEURL + "/auth/login",{
+        await fetch(API_BASE_URL + "/auth/login",{
             method:"POST",
             credentials:"include",
             headers:{"Content-Type":"application/json"},

@@ -1,3 +1,4 @@
+import { HOME_SECTIONS } from "../sections.js";
 import "./heroPage.css"
 import TitleName from "./TitleName/titleName";
 import ContactIcon from "../../ContactBar/contactIcon/contactIcon";
@@ -6,40 +7,13 @@ import SubTitle from "./subTitle";
 import PageMap from "./PageMap/pageMap";
 
 import wuSprite from "../../../assets/Wukong_Big.png"
-import { useEffect, useState } from "react";
+import useWindowWidth from "@/hooks/useWindowWidth.js"
 
 function HeroPage({ size, mapActive = { active: null } }){
-    const [width, setWidth] = useState(window.innerWidth)
-    const [mainList, setMainList] = useState([])
-    const [mapOn, setMapOn] = useState(false)
+    const width = useWindowWidth()
 
-    function styleReset(){
-        setMainList(prev=>{
-            return prev.map(item=>{
-                return item.style.color = "green"
-            })
-        })
-    }
-
-    useEffect(()=>{
-        const main = document.querySelector(".MainCont");
-        if (!main) return;
-        setMainList(Array.from(main.children))
-
-        window.addEventListener("resize",handleResize);
-
-        return()=>{
-            window.removeEventListener("resize",handleResize)
-        }
-        
-    },[])
-
-    function handleResize(){
-        setWidth(window.innerWidth)
-    }
-
-    const bigList = mainList.map(item=>{
-        return <PageMap key={item.firstChild.innerText} name={item.firstChild.innerText} active={(mapActive.active == item.firstChild.innerText)}/>
+    const bigList = HOME_SECTIONS.map(name => {
+        return <PageMap key={name} name={name} active={mapActive.active === name}/>
     })
 
     return(

@@ -2,9 +2,9 @@ import express from "express";
 import path from "path";
 import {fileURLToPath} from "url";
 import * as proj from "../../models/proj_cards.js"
-import * as user from "../../models/users.js"
 import projectLikesRouter from "./projectlikes.js";
 import projCommentsRouter from "./project_comments.js";
+import requireAuth from "../../auth/accessRole.js";
 
 
 const _filename = fileURLToPath(import.meta.url);
@@ -16,7 +16,7 @@ export default function projectRouting(upload){
     router.use(projectLikesRouter())
     router.use(projCommentsRouter())
 
-    router.post("/createproj", upload.single("image"),async (req, res, next)=>{
+    router.post("/createproj", requireAuth("admin", "owner"), upload.single("image"),async (req, res, next)=>{
 
         const newLink = (()=>{
             if(!req.body.link.includes("https://")) {
@@ -33,6 +33,7 @@ export default function projectRouting(upload){
         }
 
         await proj.createRow(proj_card)
+        res.sendStatus(201)
     })
 
     router.get("/getproj", async (req, res, next)=>{
@@ -45,6 +46,7 @@ export default function projectRouting(upload){
         res.type("image/jpeg")
         res.sendFile(imagePath)
     })
+
 
     return router
 }

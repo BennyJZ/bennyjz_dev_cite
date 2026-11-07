@@ -6,8 +6,10 @@
     transform: translatex(-50%);
     bottom: 0.75rem;
     z-index: 2;
+    padding: 0 1rem 0 1rem;
 
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
 
@@ -19,10 +21,6 @@
 }
 
 .rightBar{
-    position: absolute;
-    right: 0;
-    bottom: 0;
-
     display: flex;
     justify-content: center;
     align-items: center;

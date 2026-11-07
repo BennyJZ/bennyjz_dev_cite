@@ -1,13 +1,41 @@
+
 .ActivityCont{
 	position: sticky;
-    top: 0;
-
-
-    margin: 0.5rem;
+	top: 0.5rem;
+	margin: 0.5rem;
 
 	display: flex;
 	gap: 5px;
 
+}
+
+.Login {
+    position: relative;
+    width: fit-content;
+    top: 0.5rem;
+    left: 0.5rem;
+}
+
+/* Mobile: below 800px */
+@media (width < 800px) {
+    .Login {
+        position: static;
+        top: auto;
+        left: auto;
+        display: flex;
+        align-items: center;
+    }
+
+    .Login a,
+    .Login button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .Login img {
+        display: block;
+    }
 }
 
 .WelCont{
@@ -25,9 +53,17 @@
 	justify-content: center;
 }
 
+
 .greenDot{
 	border-radius: 25rem;
 	width: 0.65rem;
 	height: 0.65rem;
 	background-color: green;
 }
+
+@media (width < 800px) {
+.ActivityIconCont{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}}

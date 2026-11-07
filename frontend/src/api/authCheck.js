@@ -1,6 +1,7 @@
+import { API_BASE_URL } from "@/api/config.js";
 
 async function checkAuth(){
-    const res = await fetch(import.meta.env.VITE_BASEURL + "/authCheck",{
+    const res = await fetch(API_BASE_URL + "/authCheck",{
         method:"GET",
         credentials:"include"
     })
@@ -10,6 +11,5 @@ async function checkAuth(){
     const data = await res.json()
     return data
 }
-const authenticate = checkAuth()
 
 export default checkAuth;

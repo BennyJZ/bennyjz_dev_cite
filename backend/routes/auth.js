@@ -3,12 +3,13 @@ import * as user from "../models/users.js"
 import encryptPass from "../utils/encryptPassword.js";
 import requireAuth from "../auth/accessRole.js";
 import passport from "passport";
+import { loginLimiter } from "../middleware/rateLimits.js"
 
 export default function authRouter(){
 
     const router = express.Router();
 
-    router.post("/login",(req,res,next)=>{passport.authenticate("local",(err, user)=>{
+    router.post("/login", loginLimiter, (req,res,next)=>{passport.authenticate("local",(err, user)=>{
         if (err) {
             return next(err)
         }
@@ -51,6 +52,17 @@ export default function authRouter(){
             res.clearCookie("connect.sid");
             res.status(200).json({message:"Logged Out"})
         })
+    })
+
+    router.get("/getUsername/:id",async (req, res, next)=>{
+        try{
+            console.log(req.params.id)
+            const result = await user.getRowById(req.params.id)
+            res.status(200).json(result.username)
+        }catch(error){
+            console.error(error)
+            next(error)
+        }
     })
 
     return router

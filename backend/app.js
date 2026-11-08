@@ -8,6 +8,7 @@ import "./config/env.js"
 import path from "path";
 import {fileURLToPath} from "url";
 import multer from "multer";
+import { getRowById } from "./models/users.js"
 
 import cors from "cors";
 
@@ -42,11 +43,22 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 initLocalStrategy(passport)
-passport.serializeUser((user,cb)=>{
-    cb(null,user)
+passport.serializeUser((user, done) => {
+    done(null, user.id)
 })
-passport.deserializeUser((user,cb)=>{
-    cb(null,user)
+
+passport.deserializeUser(async (id, done) => {
+    try {
+        const user = await getRowById(id)
+
+        if (!user) {
+            return done(null, false)
+        }
+
+        done(null, user)
+    } catch (error) {
+        done(error)
+    }
 })
 
 app.use("/auth",authRouter());

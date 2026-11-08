@@ -1,6 +1,6 @@
 function Ptags(props){
     return(<>
-            <div className="projTagWrap">
+            <div className="projTagWrap tags">
             <p>
                 {props.tagname}
             </p>

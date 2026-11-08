@@ -1,12 +1,31 @@
 import "./comments.css"
 import { API_BASE_URL } from "@/api/config.js"
 import checkAuth from "@/api/authCheck.js";
-import { useState, useEffect } from "react"
+import fetchUser from "@/api/fetchUsername.js";
+import { useState, useEffect } from "react";
+import Collapse from '@mui/material/Collapse';
+import SendIcon from '@mui/icons-material/Send';
+import Reply from "./replies/reply.jsx"
 
 function TheComments(props) {
     const [user, setUser] = useState(null)
+    const [openReply, setOpenReply] = useState(false)
+    const [replyText, setReplyText] = useState()
+    const [allReplies, setAllReplies] = useState([])
+    const [username, setUsername] = useState(null)
 
-    async function handleSubmit(e){
+    useEffect(()=>{
+        (async()=>{
+            try {
+                const result = await checkAuth()
+                setUser(result.user ?? null)
+            } catch (error) {
+                console.error(error)
+            }
+        })()
+    },[])
+
+    async function handleDelete(e){
         e.preventDefault()
 
         await fetch(API_BASE_URL + "/api/comment/deletecomment",{
@@ -22,6 +41,59 @@ function TheComments(props) {
         }
 
     }
+
+    async function submitReply(e){
+        e.preventDefault()
+        const formData = new FormData(e.target)
+        const data = Object.fromEntries(formData)
+
+        const finalData = {
+            id:props.id,
+            user_id: user.id,
+            ...data
+        }
+
+        await fetch(API_BASE_URL + "/api/comment/replyComment",{
+            method:"POST",
+            credentials:"include",
+            headers: {"Content-Type" : "application/json"},
+            body:JSON.stringify(finalData)
+        })
+    }
+
+    async function getReplies(){
+        const res = await fetch(API_BASE_URL + "/api/comment/getReply/" + encodeURIComponent(props.id),{
+            method:"GET",
+            credentials: "include"
+        })
+        const data = await res.json();
+        return data
+    }
+
+    useEffect(()=>{
+        try{
+            (async ()=>{
+                const res = await getReplies()
+                const result = await fetchUser(res[0].user_id)
+                setAllReplies(res)
+                setUsername(result)
+            })()
+        }catch(error){
+            console.error(error)
+        }
+
+    },[props.id])
+
+
+    function handleReply(){
+        setOpenReply(prev=>!prev)
+    }
+
+    function handleReplyText(e){
+        setReplyText(e.target.value)
+        console.log(replyText)
+    }
+
 
     function formatCommentDate(createdAt) {
         const created = new Date(createdAt);
@@ -64,19 +136,6 @@ function TheComments(props) {
         });
     }
 
-    useEffect(()=>{
-        async function load(){
-            try {
-                const result = await checkAuth()
-                setUser(result.user ?? null)
-                console.log(result)
-            } catch (error) {
-                console.error(error)
-            }
-        }
-        load();
-    },[])
-
 
     return (<>
     <div className="commentWrapper">
@@ -94,14 +153,45 @@ function TheComments(props) {
                 {props.content}
             </div>
         </div>
+        <div>
         <p className="small">
             {formatCommentDate(props.createdAt)}
         </p>
-        {user && (user.username === props.username || user.role === "admin") && (
-            <p className="small">
-                <button onClick={handleSubmit} className="delte" >Delete</button>
-            </p>
-        )}
+        <div className="commentActionCont">
+            {user && (user.username === props.username || user.role === "owner") && (
+                <p className="small">
+                    <button onClick={handleDelete} >Delete</button>
+                </p>
+            )}
+            {user?.role === "owner" && (
+                <p className="small">
+                    <button onClick={handleReply} >Reply</button>
+                </p>
+            )}
+        </div>
+        <div className="replyWrap">
+            <Collapse in={openReply}>
+                <form className="replyForm" onSubmit={submitReply}>
+                    <textarea
+                        cols={30}
+                        rows={3}
+                        onChange={handleReplyText}
+                        name="content"
+                    />
+                    <button className="sendIconBtn" type="submit">
+                        <SendIcon />
+                    </button>
+                </form>
+            </Collapse>
+            <div>
+                {
+                    allReplies.map((item)=>{
+                        return <Reply username={username} theReply={item} formatDate={formatCommentDate}></Reply>
+                    })
+                }
+            </div>
+        </div>
+        </div>
     </div>
     </>)
 }

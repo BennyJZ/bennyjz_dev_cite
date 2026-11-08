@@ -79,8 +79,19 @@
     align-items: center;
     justify-content: center;
     padding: 10px;
-    background-color: rgba(142, 22, 22, 0.2);
     border-radius: 20px;
+}
+
+.tags{
+    background-color: rgba(142, 22, 22, 0.2);
+}
+
+.inProgress{
+    background-color: rgba(211, 47, 47, 0.5);
+}
+
+.complete{
+    background-color:rgba(46, 125, 50, 0.5);
 }
 
 .projCardWrap{

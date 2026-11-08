@@ -5,12 +5,12 @@ import "./commentSection.css"
 import { getComments, addComment } from "@/api/comments.js"
 import TheComments from './comments/comments';
 
+
 function CommentSection(props) {
     const [commentInput, setCommentInput] = useState({
         content:"",
         link:""
     })
-    const [tempComment, setTempComment] = useState({})
 
     const [user, setUser] = useState(null);
     const [comments, setComments] = useState([])

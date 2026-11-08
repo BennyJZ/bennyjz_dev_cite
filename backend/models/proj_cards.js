@@ -22,14 +22,14 @@ async function getTable(){
     }
 }
 
-async function updateProjCards(id, columnName, value){
+async function updateProjCards({proj_id, columnName, value}){
     try {
-        const allowedColumns = ["image_url", "proj_title", "description", "tag", "link"]
+        const allowedColumns = ["image_url", "proj_title", "description", "tag", "link", "is_completed"]
         if (!allowedColumns.includes(columnName)){
             throw new Error("INVALID COLUMN NAME")
         }
         const res = await db.query(`UPDATE proj_cards SET ${columnName}=$1 WHERE id=$2 RETURNING *`,
-            [value, id]
+            [value, proj_id]
         )
         return res.rows[0] || null
 

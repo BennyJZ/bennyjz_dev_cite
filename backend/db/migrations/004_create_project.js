@@ -1,6 +1,6 @@
 async function create(db) {
     try {
-        await db.query("CREATE TABLE proj_cards (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), image_url TEXT, proj_title TEXT NOT NULL, description TEXT, tag TEXT[], link TEXT, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)")
+        await db.query("CREATE TABLE proj_cards (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), image_url TEXT, proj_title TEXT NOT NULL, description TEXT, tag TEXT[], link TEXT, is_completed BOOLEAN DEFAULT FALSE, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)")
     } catch (error) {
         console.error(error)
         throw error

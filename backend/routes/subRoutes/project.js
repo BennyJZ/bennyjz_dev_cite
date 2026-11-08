@@ -5,6 +5,9 @@ import * as proj from "../../models/proj_cards.js"
 import projectLikesRouter from "./projectlikes.js";
 import projCommentsRouter from "./project_comments.js";
 import requireAuth from "../../auth/accessRole.js";
+import { projectImageParamsSchema, createProjectSchema} from "../../schemas/projectSchema.js"
+import validate from "../../middleware/validate.js"
+
 
 
 const _filename = fileURLToPath(import.meta.url);
@@ -16,21 +19,16 @@ export default function projectRouting(upload){
     router.use(projectLikesRouter())
     router.use(projCommentsRouter())
 
-    router.post("/createproj", requireAuth("admin", "owner"), upload.single("image"),async (req, res, next)=>{
+    router.post("/createproj", requireAuth("admin", "owner"), upload.single("image"), validate(createProjectSchema), async (req, res, next)=>{
 
-        const newLink = (()=>{
-            if(!req.body.link.includes("https://")) {
-                return `https://${req.body.link}`
-            }else {
-                return req.body.link
-            }
-        })()
-        const proj_card = {
-            ...req.body,
-            link: newLink,
-            image_url: "assets/project/"+req.file.filename,
-            tag:req.body.tag.split(",")
-        }
+    if (!req.file) {
+        return res.status(400).json({ error: "Image is required" })
+    }
+
+    const proj_card = {
+        ...req.body,
+        image_url: req.file.filename
+    }
 
         await proj.createRow(proj_card)
         res.sendStatus(201)
@@ -41,11 +39,24 @@ export default function projectRouting(upload){
         res.json(result.rows)
     })
 
-    router.get("/projimage/{*name}",(req, res, next)=>{
-        const imagePath = path.join(_dirname,"..","..",req.params.name.join("/"))
+    router.get("/projimage/:filename", validate(projectImageParamsSchema, "params"), (req, res, next)=>{
         res.type("image/jpeg")
-        res.sendFile(imagePath)
+        res.sendFile(req.params.filename, {
+            root: path.resolve(_dirname, "../../assets/project"),
+            dotfiles: "deny"
+        }, error => {
+            if (error) next(error)
+        })
     })
+
+    router.post("/updateProj",requireAuth("admin", "owner"), (req, res, next)=>{
+        const check= {
+            columnName:"is_completed",
+            ...req.body
+        }
+        console.log(check)
+        proj.updateProjCards(check)
+    } )
 
 
     return router

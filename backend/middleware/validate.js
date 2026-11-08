@@ -1,18 +1,20 @@
-export default function validate(schema) {
+export default function validate(schema, source = "body") {
     return (req, res, next) => {
-        const result = schema.safeParse(req.body)
+        const result = schema.safeParse(req[source])
 
         if (!result.success) {
             return res.status(400).json({
-                error: "Invalid request body",
-                issues: result.error.issues.map(issue => ({
-                    path: issue.path.join("."),
-                    message: issue.message
-                }))
+                error: `Invalid request ${source}`,
+                issues: result.error.issues
             })
         }
 
-        req.body = result.data
+        if (source === "body") {
+            req.body = result.data
+        } else {
+            res.locals[source] = result.data
+        }
+
         next()
     }
 }

@@ -7,3 +7,36 @@
 .small {
     font-size: 0.75rem;
 }
+
+
+.commentActionCont{
+    display:flex;
+    gap: 0.5rem;
+}
+
+.replyForm{
+    display:flex;
+    flex-direction: row;
+}
+
+.replyWrap{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.replyCommentWraps{
+    display: flex;
+    gap: 1.5rem;
+}
+
+.singleReplyWrap{
+    display: flex;
+    flex-direction: column;
+}
+
+.nameWrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

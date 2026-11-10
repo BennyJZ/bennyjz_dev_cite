@@ -54,7 +54,6 @@ function ProjPage(){
     }
 
     useEffect(()=>{
-
         (async ()=>{
             const proj = await getProj()
             setProjData(proj)

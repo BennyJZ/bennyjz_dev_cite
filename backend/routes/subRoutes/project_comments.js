@@ -69,5 +69,14 @@ export default function projCommentsRouter(){
         }
     })
 
+    router.post("/deleteReply/:id", requireAuth("admin", "owner"), async (req, res, next)=>{
+        try{
+            await commentReplies.deleteReplyComment(req.params.id)
+        }catch(error){
+            console.error(error)
+            next(error)
+        }
+    })
+
     return router
 }

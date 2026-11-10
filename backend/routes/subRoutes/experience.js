@@ -2,6 +2,7 @@ import express from "express"
 import * as xp from "../../models/xp_cards.js"
 import requireAuth from "../../auth/accessRole.js";
 
+
 export default function experienceRouter(){
     
     const router = express.Router()
@@ -23,6 +24,16 @@ export default function experienceRouter(){
             next(error)
         }
 
+    })
+
+    router.post("/changeDate",requireAuth("admin", "owner"), async (req, res, next)=>{
+        try {
+            console.log(req.body)
+            await xp.updateXpCards(req.body)
+        }catch(error){
+            cosnole.error(error)
+            next(error)
+        }
     })
 
     return router

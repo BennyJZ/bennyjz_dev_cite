@@ -29,10 +29,10 @@ async function getTable(comment_id) {
     }
 }
 
-async function deleteReplyComment({id, user_id}) {
+async function deleteReplyComment(id) {
     try{
-        const res = await db.query("DELETE FROM proj_comment_replies WHERE id=$1 AND (user_id=$2) RETURNING *",
-            [id, user_id]
+        const res = await db.query("DELETE FROM proj_comment_replies WHERE id=$1 RETURNING *",
+            [id]
         )
         return res.rows[0] || null
     } catch (error) {

@@ -8,9 +8,15 @@ function ContactIcon(){
     return(
         <>
             <div className="contactBar">
-                <div className="contIcon"><LinkedInIcon sx={{fontSize:25}} /></div>
-                <div className="contIcon"><GitHubIcon sx={{fontSize:22}} /></div>
-                <div className="contIcon"><EmailIcon sx={{fontSize:25}}/></div>
+                <a href="https://www.linkedin.com/in/benny98jz" target="_blank">
+                    <div className="contIcon"><LinkedInIcon sx={{fontSize:25}} /></div>
+                </a>
+                <a href="https://github.com/BennyJZ" target="_blank">
+                    <div className="contIcon"><GitHubIcon sx={{fontSize:22}} /></div>
+                </a>
+                <a href="mailto:benny.jan@hotmail.com" target="_blank">
+                    <div className="contIcon"><EmailIcon sx={{fontSize:25}}/></div>
+                </a>
             </div>
         </>
     )

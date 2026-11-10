@@ -27,17 +27,21 @@ function TheComments(props) {
 
     async function handleDelete(e){
         e.preventDefault()
+        try{
+            await fetch(API_BASE_URL + "/api/comment/deletecomment",{
+                method:"POST",
+                credentials:"include",
+                headers: { "Content-Type": "application/json" },
+                body:JSON.stringify({ comment_id: props.id })
+            });
 
-        await fetch(API_BASE_URL + "/api/comment/deletecomment",{
-            method:"POST",
-            credentials:"include",
-            headers: { "Content-Type": "application/json" },
-            body:JSON.stringify({ comment_id: props.id })
-        });
+            if (!response.ok) {
+                throw new Error(`Delete failed: ${response.status}`)
+            }
 
-
-        if (!response.ok) {
-            throw new Error(`Delete failed: ${response.status}`)
+        }catch(error){
+            console.error(error)
+            throw error
         }
 
     }
@@ -186,7 +190,7 @@ function TheComments(props) {
             <div>
                 {
                     allReplies.map((item)=>{
-                        return <Reply username={username} theReply={item} formatDate={formatCommentDate}></Reply>
+                        return <Reply key={item.id} username={username} theReply={item} formatDate={formatCommentDate}></Reply>
                     })
                 }
             </div>

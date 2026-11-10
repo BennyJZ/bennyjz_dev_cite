@@ -28,6 +28,20 @@ function ProjCard(props){
         setCollapseComments(prev => !prev)
     }
 
+    async function handleDelete(e){
+        e.preventDefault()
+        try{
+            const result = await fetch(API_BASE_URL+"/api/projects/deleteProj/"+encodeURIComponent(props.id),{
+                method:"GET",
+                credentials:"include"
+            })
+            const data = await result.json()
+        }catch(error){
+            console.error(error)
+            throw error;
+        }
+    }
+
     useEffect(()=>{
         (async ()=>{
             const user = await checkAuth()
@@ -72,6 +86,15 @@ function ProjCard(props){
                     <CommentIcon className="theIcon" onClick={handleCollapseComments} style={collapseComments?{color:"FFD700"}:null}/>
                     <div className="commentCount">{commentCount}</div>
                 </div>
+                {allowedRoles.includes(auth.user?.role)?
+                    <div>
+                        <p>
+                            <button onClick={handleDelete}>
+                                Delete
+                            </button>
+                        </p>
+                    </div>
+                :null}
             </div>
         </div>
         <Collapse in={collapseComments}> 

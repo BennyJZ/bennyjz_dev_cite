@@ -7,11 +7,11 @@ import projCommentsRouter from "./project_comments.js";
 import requireAuth from "../../auth/accessRole.js";
 import { projectImageParamsSchema, createProjectSchema} from "../../schemas/projectSchema.js"
 import validate from "../../middleware/validate.js"
-
-
+import { unlink } from "node:fs/promises"
 
 const _filename = fileURLToPath(import.meta.url);
 const _dirname = path.dirname(_filename)
+const imageDirectory = path.resolve(_dirname, "../../assets/project")
 
 export default function projectRouting(upload){
     const router = express.Router()
@@ -49,15 +49,32 @@ export default function projectRouting(upload){
         })
     })
 
-    router.post("/updateProj",requireAuth("admin", "owner"), (req, res, next)=>{
+    router.post("/updateProj", requireAuth("admin", "owner"), (req, res, next)=>{
         const check= {
             columnName:"is_completed",
             ...req.body
         }
-        console.log(check)
         proj.updateProjCards(check)
     } )
 
+    router.get("/deleteProj/:id", requireAuth("admin", "owner"), async (req, res, next)=>{
+        const projectList = await proj.getTable()
+        const match = projectList.rows.filter(item=>item.id === req.params.id)
+
+        if (!/^[a-f0-9]{32}$/.test(match[0].image_url)) {
+            throw new Error("Invalid image filename")
+        }
+        try {
+            await unlink(path.join(imageDirectory, match[0].image_url))
+        } catch (error) {
+            if (error.code !== "ENOENT") {
+                throw error
+            }
+        }
+        await proj.deleteProjCard(req.params.id)
+
+        res.status(200).json({status:"success",response:true})
+    })
 
     return router
 }

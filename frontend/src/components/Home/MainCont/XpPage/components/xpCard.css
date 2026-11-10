@@ -64,3 +64,12 @@
     background-color: rgba(142, 22, 22, 0.2);
     border-radius: 20px;
 }
+
+.xpDateForm{
+    width: auto;
+    align-items: flex-start;
+}
+
+.xpDateInput{
+    width: 8rem;
+}

@@ -69,7 +69,6 @@ async function tempSetup(){
     await proj_replies.create(db)
 }
 
-tempSetup()
-// setUpDb()
+setUpDb()
 // dropDb()
 // emptyDb()

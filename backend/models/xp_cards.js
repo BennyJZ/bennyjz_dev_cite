@@ -21,7 +21,7 @@ async function getTable(){
     }
 }
 
-async function updateXpCards(id, columnName, value){
+async function updateXpCards({id, columnName, value}){
     try {
         const allowedColumns = ["date", "work_title", "description", "tag", "link"]
         if (!allowedColumns.includes(columnName)){

@@ -33,7 +33,7 @@ function XpPage(){
     <div className="xpWrap">
         <div className={`xpCont ${width<800?null:"xpActCont"}`}>
             {xpData.map(item=>{
-                return <XpCard key={item.id} date={item.date} workTitle={item.work_title} desc={item.description} tag={item.tag} link={item.link}/>
+                return <XpCard key={item.id} id={item.id} date={item.date} workTitle={item.work_title} desc={item.description} tag={item.tag} link={item.link}/>
             })}
         </div>
     </div>

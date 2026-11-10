@@ -56,7 +56,6 @@ export default function authRouter(){
 
     router.get("/getUsername/:id",async (req, res, next)=>{
         try{
-            console.log(req.params.id)
             const result = await user.getRowById(req.params.id)
             res.status(200).json(result.username)
         }catch(error){
